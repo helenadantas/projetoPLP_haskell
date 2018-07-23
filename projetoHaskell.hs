@@ -61,7 +61,7 @@ controller tamanho nivel paresEncontrados matrizUsuario matrizInt tempo = do
 			-- verificar a posicaoValida e modifica matriz
 			
 			
-			cond <- posicaoValida posicao matrizInt
+			cond <- verificaPosicao posicao matrizInt
 			if cond then do
 				matrizM <- modificaMatriz tamanho elem posicao matrizUsuario
 				let posicao2 = (linha2, coluna2)
@@ -88,6 +88,12 @@ controller tamanho nivel paresEncontrados matrizUsuario matrizInt tempo = do
 	
 	-- Nao sei se ta certo
 	putStrLn "Fim de jogo"
-		
-		
-		
+
+-- verificando posicao ~sem testar~	
+verificaPosicao :: Int -> Int -> [[String]] -> IO Bool
+verificaPosicao l c matriz = do
+	let linha = l - 1
+	let coluna = c - 1
+	if (matriz !! linha !! coluna == "*") then 
+		return True
+	else return False
