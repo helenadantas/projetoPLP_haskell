@@ -97,3 +97,9 @@ verificaPosicao l c matriz = do
 	if (matriz !! linha !! coluna == "*") then 
 		return True
 	else return False
+	
+--verifica se os pares escolhidos pelo usuario são iguais na matriz
+verificaPares :: Int-> Int-> Int-> Int-> [[Int]] -> Int
+verificaPares coluna1 linha1 coluna2 linha2 
+	| matriz !! (linha1-1) !! (coluna1-1) == matriz !! (linha2-1) !! (coluna2-1) = true
+    | otherwise = false
