@@ -28,10 +28,20 @@ nivel nome = do
 		iniciaJogo niveis 8 nome
 	else
 		nivel nome
-	
+
+-- FALTA CODAR O insereElementoMatriz
+
+-- Modifica a matriz
+modificaMatriz :: Int -> String -> (Int,Int) -> [[String]] -> IO [[String]]
+modificaMatriz tamanho elem l c matriz = do
+	let linha1 = l
+	let coluna1 = c
+	let matrizMod = insereElementoMatriz tamanho linha1 coluna1 elem matriz [[]]
+	return matrizMod
+
 -- Controller
 controller :: Int -> Int -> Int -> [[String]] -> [[Int]] -> IO()
-controller tamanho nivel paresEncontrados matrizUsuario matrizInt tempo = do
+controller tamanho nivel paresEncontrados matrizUsuario matrizInt = do
 	let tamMatriz = tamanho * tamanho
 	let xD =  intToDouble x
 	let g = xD / 2
