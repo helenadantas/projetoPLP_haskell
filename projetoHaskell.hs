@@ -7,8 +7,7 @@ menu = do
 		putStrLn "Jogo da Memória"
 		putStrLn "\nMenu:"
 		putStrLn "\n1. Iniciar jogo"
-		putStrLn "\n2. Mostrar Ranking"
-		putStrLn "\n3. Sair"
+		putStrLn "\n. Sair"
 		
 -- Escolha do nivel
 nivel :: String -> IO()
@@ -21,11 +20,11 @@ nivel nome = do
 	dados <- getLine
 	let niveis = read(dados)
 	if niveis == 1 then
-		iniciaJogo niveis 4 nome
+		inicializa niveis 4 nome
 	else if niveis == 2 then
-		iniciaJogo niveis 6 nome
+		inicializa niveis 6 nome
 	else if niveis == 3 then
-		iniciaJogo niveis 8 nome
+		inicializa niveis 8 nome
 	else
 		nivel nome
 
@@ -39,6 +38,14 @@ modificaMatriz tamanho elem l c matriz = do
 	let matrizMod = insereElementoMatriz tamanho linha1 coluna1 elem matriz [[]]
 	return matrizMod
 
+-- Inicialização do jogo
+inicializa :: Int -> Int -> IO()
+inicializa nivel tamanho = do
+	let matrizDoUsuario = (matrizUsuario tamanho)
+	matrizSistema <- geraMatriz tamanho
+	jogo tamanho nivel 0 matrizDoUsuario matrizSistema
+	putStrLn "\n"
+	
 -- Controller
 controller :: Int -> Int -> Int -> [[String]] -> [[Int]] -> IO()
 controller tamanho nivel paresEncontrados matrizUsuario matrizInt = do
@@ -113,3 +120,5 @@ verificaPares :: Int-> Int-> Int-> Int-> [[Int]] -> Int
 verificaPares coluna1 linha1 coluna2 linha2 
 	| matriz !! (linha1-1) !! (coluna1-1) == matriz !! (linha2-1) !! (coluna2-1) = true
     | otherwise = false
+    
+
