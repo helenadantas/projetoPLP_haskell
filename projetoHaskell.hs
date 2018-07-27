@@ -6,7 +6,8 @@ main = do putStrLn("Menu:" ++ "\n")
           system "clear"
           putStrLn "Jogo da Memória"
           putStrLn "\nMenu:"
-          putStrLn "\nComo Jogar: \nA linha/coluna de escolha do nivel inciante vai de 0-3."
+          putStrLn "\nComo Jogar: A linha sera a escolha da lista e a coluna a posicao do elemento nesta lista."
+          putStrLn "\nA linha/coluna de escolha do nivel inciante vai de 0-3."
           putStrLn "\nNo caso do intermediario de 0-5."
           putStrLn "\nNo caso do avancado de 0-7.\n"
           putStrLn "\nEscolha um nível:"
@@ -33,7 +34,7 @@ menu 3 = do
        jogada 32 0 matrizAvancada matrizAvancadaUsuario
 menu 4 = do 
           system "clear"
-          putStrLn("\n" ++ "Programa finalizado.")
+          putStrLn("\n" ++ "Jogo finalizado.")
 
 jogada ::Int -> Int -> [[Int]] -> [[Int]] -> IO()
 jogada 0 jogadas matrizI matrizF = putStrLn "Fim de Jogo!!!"
