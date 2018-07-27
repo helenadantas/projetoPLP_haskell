@@ -18,7 +18,9 @@ main = do putStrLn("Menu:" ++ "\n")
           
           number <- readLn
           menu number
-
+ 
+-- o metodo ira funcionar de acordo com a escolha do nivel do usuario, ele instancia as duas matrizes
+-- do sistema e do usuario, respectivamente, depois iniciar a jogada.
 menu :: Int -> IO()
 menu 1 = do
        let matrizIniciante = [[4,6,7,2], [1,3,5,2], [4,5,6,3], [1,8,8,7]]
@@ -36,6 +38,10 @@ menu 4 = do
           system "clear"
           putStrLn("\n" ++ "Jogo finalizado.")
 
+-- O metodo faz o controller do jogo, ele ira receber as escolhas do usuario, verificar na matriz do
+-- sistema se os elementos sao iguais, se sim, a modificacao da matriz do usuarario ficara permanente
+-- se nao, a tela ira limpar e a matriz do usuario permanecera a anterior.
+-- O metodo eh recursivo, ate que o usuario encontre todos os pares.
 jogada ::Int -> Int -> [[Int]] -> [[Int]] -> IO()
 jogada 0 jogadas matrizI matrizF = putStrLn "Fim de Jogo!!!"
 jogada i j (s:cs) (x:xs) = do
@@ -64,18 +70,22 @@ jogada i j (s:cs) (x:xs) = do
         else do
          system "clear"
          jogada i (j+1) (s:cs) (x:xs)
-                                            
+
+-- O metodo ira modificar a linha da matriz do usuario trocando o 0 pelo respectivo elemento
+--escolhido pelo usuario na matriz do sistema.                                            
 modificaLinha :: [Int] -> Int -> Int -> [Int]
 modificaLinha [] elemento coluna = []
 modificaLinha (h:hs) elemento 0 =  (elemento:hs)
 modificaLinha (h:hs) elemento coluna = (h:(modificaLinha hs elemento (coluna-1)))
 
+-- O metodo ira modificar a matriz do usuario de acordo com a respectiva linha e coluna escolhida
+--pelo usuario trocando o 0 pelo elemento
 atualizaMatrizUsuario :: [[Int]] -> Int -> [Int] -> [[Int]]
 atualizaMatrizUsuario [] e1 _  = []
 atualizaMatrizUsuario (h:ht) 0 aux = aux:ht 
 atualizaMatrizUsuario (h:ht) l1 aux = h : (atualizaMatrizUsuario ht (l1-1) aux)
 
-                                                                         
+-- vai retornar o elemento da matriz de acordo com a linha e coluna passadas pelo usuario                                                                        
 getElemento :: [[Int]] -> Int -> Int -> Int
 getElemento matriz linha coluna = matriz !! linha !! coluna
 
