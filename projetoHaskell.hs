@@ -1,6 +1,14 @@
+import System.IO
+import System.IO.Error
+import System.Process
+
 main = do putStrLn("Menu:" ++ "\n")
+          system "clear"
           putStrLn "Jogo da Memória"
           putStrLn "\nMenu:"
+          putStrLn "\nComo Jogar: \nA linha/coluna de escolha do nivel inciante vai de 0-3."
+          putStrLn "\nNo caso do intermediario de 0-5."
+          putStrLn "\nNo caso do avancado de 0-7.\n"
           putStrLn "\nEscolha um nível:"
           putStrLn "\n1. Iniciante"
           putStrLn "\n2. Intermediario"
@@ -23,12 +31,12 @@ menu 3 = do
        let matrizAvancada = [[10,4,9,2,14,14,21,26], [23,17,29,11,20,1,30,30], [4,27,17,5,24,29,6,6], [26,28,11,8,13,16,12,31], [21,22,2,19,19,1,25,25], [3,27,10,32,24,15,7,12], [23,18,28,5,16,15,31,13], [9,22,3,18,20,32,7,8]]          
        let matrizAvancadaUsuario = [[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0]]
        jogada 32 0 matrizAvancada matrizAvancadaUsuario
-menu 4 = do putStrLn("\n" ++ "Programa finalizado.")
-
-
+menu 4 = do 
+          system "clear"
+          putStrLn("\n" ++ "Programa finalizado.")
 
 jogada ::Int -> Int -> [[Int]] -> [[Int]] -> IO()
-jogada 0 jogadas matrizI matrizF = putStrLn "Fim de Jogo" 
+jogada 0 jogadas matrizI matrizF = putStrLn "Fim de Jogo!!!"
 jogada i j (s:cs) (x:xs) = do
         putStrLn "\nDigite a linha do primeiro elemento:"
         linha1 <- getLine
@@ -51,9 +59,11 @@ jogada i j (s:cs) (x:xs) = do
         let matrizUsuarioAtualizada = atualizaMatrizUsuario matrizusuario1 l2 aux2
         print matrizUsuarioAtualizada
         
-        if (e1 == e2) then do jogada (i-1) (j+1) (s:cs) matrizUsuarioAtualizada else jogada i (j+1) (s:cs) (x:xs)
-               
-                           
+        if (e1 == e2) then do jogada (i-1) (j+1) (s:cs) matrizUsuarioAtualizada 
+        else do
+         system "clear"
+         jogada i (j+1) (s:cs) (x:xs)
+                                            
 modificaLinha :: [Int] -> Int -> Int -> [Int]
 modificaLinha [] elemento coluna = []
 modificaLinha (h:hs) elemento 0 =  (elemento:hs)
@@ -67,6 +77,5 @@ atualizaMatrizUsuario (h:ht) l1 aux = h : (atualizaMatrizUsuario ht (l1-1) aux)
                                                                          
 getElemento :: [[Int]] -> Int -> Int -> Int
 getElemento matriz linha coluna = matriz !! linha !! coluna
-
 
 
